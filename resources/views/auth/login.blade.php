@@ -9,18 +9,28 @@
         <!-----start-main---->
     <div class="main">
         <div class="login-form">
-            <h1>Member Login</h1>
+            <h1>{{ trans('messages.title') }}</h1>
             <div class="head">
                 {!! HTML::image('images/user.png') !!}
             </div>
-            <form>
+            <form method="POST" action="/auth/login">
+                {!! csrf_field() !!}
                 <label>Usuário</label>
-                <input type="text" class="text" value="" >
+                <input type="text" name="email" value="{{ old('email') }}" />
                 <label>Senha</label>
-                <input type="password" value="">
-                <div class="submit">
-                    <input type="submit" onclick="myFunction()" value="LOGIN" >
+                <input type="password" name="password" id="password">
+                <div>
+                    <input type="hidden" name="remember" value="false" /> {{--TODO Before--}}
                 </div>
+                <div class="submit">
+                    <input type="submit"  value="LOGIN" >
+                </div>
+                <div>
+                    <a   href="\auth\register">Cadastrar nova conta</a>
+                    <br/>
+                    {{--<a   href="\auth\register">Esqueci minha senha...</a>--}}
+                </div>
+
             </form>
         </div>
         <!--//End-login-form-->
