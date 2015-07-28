@@ -14,7 +14,7 @@
                 {!! HTML::image('images/user.png') !!}
             </div>
             <form>
-                <label>Usu·rio</label>
+                <label>Usu√°rio</label>
                 <input type="text" class="text" value="" >
                 <label>Senha</label>
                 <input type="password" value="">
