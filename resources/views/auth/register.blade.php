@@ -14,10 +14,10 @@
             <div class="head">
                 {!! HTML::image('images/user.png') !!}
             </div>
-            <form method="POST" action="/auth/register">
+            <form method="POST" action="{{URL::to('/auth/register')}}">
                 {!! csrf_field() !!}
                 <div>
-                    Name
+                    Nome
                     <input type="text" name="name" value="{{ old('name') }}">
                 </div>
 
@@ -27,17 +27,23 @@
                 </div>
 
                 <div>
-                    Password
+                    Senha
                     <input type="password" name="password">
                 </div>
 
                 <div>
-                    Confirm Password
+                    Confirmar Senha
                     <input type="password" name="password_confirmation">
                 </div>
 
                 <div class="submit">
                     <input type="submit"  value="REGISTRAR" >
+                </div>
+                <div>
+
+                    <a   href="{{URL::to('auth\login')}}">Efetuar Login</a>
+                    <br/>
+                    {{--<a   href="\auth\register">Esqueci minha senha...</a>--}}
                 </div>
             </form>
         </div>

@@ -1,14 +1,15 @@
 @extends('layouts.default')
 @section('head')
     <title>{{ trans('messages.title') }} - Login</title>
-@stop
+    @stop
 
-@section('content')
-        <!-- Page Heading -->
+    @section('content')
+            <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Dashboard <small>Statistics Overview</small>
+                Dashboard
+                <small>Dashboard - Manutenção de Senhas</small>
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
@@ -23,99 +24,8 @@
         <div class="col-lg-12">
             <div class="alert alert-info alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
-            </div>
-        </div>
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-comments fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">26</div>
-                            <div>New Comments!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-tasks fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">12</div>
-                            <div>New Tasks!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-yellow">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">124</div>
-                            <div>New Orders!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-support fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">13</div>
-                            <div>Support Tickets!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
+                <i class="fa fa-info-circle"></i> Guarde suas senhas, com segurança e praticidade através desta
+                ferramenta.
             </div>
         </div>
     </div>
@@ -125,150 +35,103 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Area Chart</h3>
+                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Painel de Senhas Salvas</h3>
                 </div>
                 <div class="panel-body">
-                    <div id="morris-area-chart"></div>
+
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Url</th>
+                                    <th>Descrição</th>
+                                    <th>Username</th>
+                                    <th>Senha</th>
+                                    <th>Ação</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($passwords as $password)
+                                    <tr>
+                                        <td>{{ $password->url }}</td>
+                                        <td>{{ $password->description }}</td>
+                                        <td>{{ $password->username }}</td>
+                                        <td>{{ Crypt::decrypt($password->password) }}</td>
+                                        <td>
+
+                                        {!!  Form::open(array('route' => array('password.destroy',  $password->id), 'method' => 'delete')) !!}
+                                            <button class="btn btn-warning" type="submit" >Excluir</button>
+                                        {!! Form::close() !!}
+
+                                        </td>
+
+
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                            Adicionar Nova Senha
+                        </button>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- /.row -->
 
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Donut Chart</h3>
-                </div>
-                <div class="panel-body">
-                    <div id="morris-donut-chart"></div>
-                    <div class="text-right">
-                        <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
+
+    {{-- Modal Content--}}
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="POST" action="{!!URL::route('password.store')!!}">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Inserir Nova Senha</h4>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tasks Panel</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item">
-                            <span class="badge">just now</span>
-                            <i class="fa fa-fw fa-calendar"></i> Calendar updated
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <span class="badge">4 minutes ago</span>
-                            <i class="fa fa-fw fa-comment"></i> Commented on a post
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <span class="badge">23 minutes ago</span>
-                            <i class="fa fa-fw fa-truck"></i> Order 392 shipped
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <span class="badge">46 minutes ago</span>
-                            <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <span class="badge">1 hour ago</span>
-                            <i class="fa fa-fw fa-user"></i> A new user has been added
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <span class="badge">2 hours ago</span>
-                            <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning"
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <span class="badge">yesterday</span>
-                            <i class="fa fa-fw fa-globe"></i> Saved the world
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <span class="badge">two days ago</span>
-                            <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page"
-                        </a>
+
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="url">URL de Acesso</label>
+                            <input type="text" class="form-control" name="url"
+                                   placeholder="Nome do Usuário do Aplicativo"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descrição</label>
+                            <input type="text" class="form-control" name="description"
+                                   placeholder="Descrição do Aplicativo"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" name="username"
+                                   placeholder="Nome do Usuário do Aplicativo"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <input type="password" class="form-control" name="password"
+                                   placeholder="Senha do Aplicativo"/>
+                        </div>
+                        <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                     </div>
-                    <div class="text-right">
-                        <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Inserir
+                        </button>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Transactions Panel</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover table-striped">
-                            <thead>
-                            <tr>
-                                <th>Order #</th>
-                                <th>Order Date</th>
-                                <th>Order Time</th>
-                                <th>Amount (USD)</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>3326</td>
-                                <td>10/21/2013</td>
-                                <td>3:29 PM</td>
-                                <td>$321.33</td>
-                            </tr>
-                            <tr>
-                                <td>3325</td>
-                                <td>10/21/2013</td>
-                                <td>3:20 PM</td>
-                                <td>$234.34</td>
-                            </tr>
-                            <tr>
-                                <td>3324</td>
-                                <td>10/21/2013</td>
-                                <td>3:03 PM</td>
-                                <td>$724.17</td>
-                            </tr>
-                            <tr>
-                                <td>3323</td>
-                                <td>10/21/2013</td>
-                                <td>3:00 PM</td>
-                                <td>$23.71</td>
-                            </tr>
-                            <tr>
-                                <td>3322</td>
-                                <td>10/21/2013</td>
-                                <td>2:49 PM</td>
-                                <td>$8345.23</td>
-                            </tr>
-                            <tr>
-                                <td>3321</td>
-                                <td>10/21/2013</td>
-                                <td>2:23 PM</td>
-                                <td>$245.12</td>
-                            </tr>
-                            <tr>
-                                <td>3320</td>
-                                <td>10/21/2013</td>
-                                <td>2:15 PM</td>
-                                <td>$5663.54</td>
-                            </tr>
-                            <tr>
-                                <td>3319</td>
-                                <td>10/21/2013</td>
-                                <td>2:13 PM</td>
-                                <td>$943.45</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="text-right">
-                        <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-    <!-- /.row -->
+
+    {{-- End Modal Content--}}
+
 @stop

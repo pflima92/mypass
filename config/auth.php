@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Authentication Driver
+    | Default Auth Driver
     |--------------------------------------------------------------------------
     |
     | This option controls the authentication driver that will be utilized.
@@ -19,7 +19,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Authentication Model
+    | Auth Model
     |--------------------------------------------------------------------------
     |
     | When using the "Eloquent" authentication driver, we need to know which
@@ -32,7 +32,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Authentication Table
+    | Auth Table
     |--------------------------------------------------------------------------
     |
     | When using the "Database" authentication driver, we need to know which

@@ -11,21 +11,21 @@
 <!-- Top Menu Items -->
 <ul class="nav navbar-right top-nav">
     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Paulo Lima <b
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  {{ Auth::user()->name }} <b
                     class="caret"></b></a>
         <ul class="dropdown-menu">
             <li>
-                <a href="#"><i class="fa fa-fw fa-user"></i>Profile</a>
+                <a href="#"><i class="fa fa-fw fa-user"></i>Perfil</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-fw fa-lock"></i>Passwords</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-gear"></i>Settings</a>
+                <a href="#"><i class="fa fa-fw fa-gear"></i>Configurações</a>
             </li>
             <li class="divider"></li>
             <li>
-                <a href="auth/logout"><i class="fa fa-fw fa-power-off"></i>Log Out</a>
+                <a href="{{URL::to('auth\logout')}}"><i class="fa fa-fw fa-power-off"></i>Sair</a>
             </li>
         </ul>
     </li>

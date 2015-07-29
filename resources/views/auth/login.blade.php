@@ -2,7 +2,7 @@
 @section('head')
     <title>{{ trans('messages.title') }} - Login</title>
     {!! HTML::style('css/login.css') !!}
-    <meta charset="utf-8">
+    <META CHARSET="UTF-8">
 @stop
 
 @section('content')
@@ -26,7 +26,7 @@
                     <input type="submit"  value="LOGIN" >
                 </div>
                 <div>
-                    <a   href="\auth\register">Cadastrar nova conta</a>
+                    <a   href="{{URL::to('auth\register')}}">Cadastrar nova conta</a>
                     <br/>
                     {{--<a   href="\auth\register">Esqueci minha senha...</a>--}}
                 </div>
