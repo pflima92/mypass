@@ -8,11 +8,11 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                <small>Dashboard - Manutenção de Senhas</small>
+                <small>Dashboard - Configuração da Conta</small>
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Dashboard
+                    <i class="fa fa-dashboard"></i> Dashboard \  <i class="fa fa-user"></i> Perfil
                 </li>
             </ol>
         </div>
@@ -23,8 +23,7 @@
         <div class="col-lg-12">
             <div class="alert alert-info alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <i class="fa fa-info-circle"></i> Guarde suas senhas, com segurança e praticidade através desta
-                ferramenta.
+                <i class="fa fa-info-circle"></i> Atualizar dados do perfil do usuário.
             </div>
         </div>
     </div>
@@ -34,57 +33,28 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Painel de Senhas Salvas</h3>
+                    <h3 class="panel-title"><i class="fa fa-user"></i> Dados Usuário</h3>
                 </div>
                 <div class="panel-body">
 
                     <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Url</th>
-                                    <th>Descrição</th>
-                                    <th>Username</th>
-                                    <th>Senha</th>
-                                    <th>Ação</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach ($passwords as $password)
-                                    <tr>
-                                        <td><a href="{{ $password->url }}">{{ $password->url }}</a></td>
-                                        <td>{{ $password->description }}</td>
-                                        <td>{{ $password->username }}</td>
-                                        <td>{{--<a style="cursor: pointer"  >{{ Crypt::decrypt($password->password) }}</a>--}}
-
-                                            <div class="item">
-                                                <a onclick="copyToClipboard('{{ Crypt::decrypt($password->password) }}');">
-                                                    <p class="btn btn-info new-label"><span class="align">SENHA SALVA</span></p>
-                                                </a>
-                                            </div>
-
-
-                                        </td>
-                                        <td>
-
-                                            {!!  Form::open(array('route' => array('password.destroy',  $password->id), 'method' => 'delete')) !!}
-                                            <button class="btn btn-warning" type="submit">Excluir</button>
-                                            {!! Form::close() !!}
-
-                                        </td>
-
-
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-
+                        <div>
+                            <label>Nome do Usuário: </label> {{ Auth::user()->name }}
+                        </div>
+                        <div>
+                            <label>Email: </label> {{ Auth::user()->email }}
+                        </div>
+                        <div>
+                            <label>Status: </label> {{ Auth::user()->active == 1 ? 'ATIVO' : 'INATIVO' }}
                         </div>
 
-                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                            Adicionar Nova Senha
-                        </button>
+                        <br/>
+
+                        <hr/>
+                        {!!  Form::open(array('url' => 'account/inactive', 'method' => 'delete')) !!}
+                        <button class="btn btn-warning" type="submit">Desativar Conta</button>
+                        {!! Form::close() !!}
+
 
                     </div>
                 </div>

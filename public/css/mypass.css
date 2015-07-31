@@ -11,6 +11,40 @@ body {
     background-color: #222;
 }
 
+.item{
+    width: 30px;
+}
+.label a{
+    text-decoration: none;
+}
+
+.label {
+
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    white-space: nowrap;
+    background-color: #bfbfbf;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-decoration: none;
+}
+.label.success {
+    background-color: #46a546;
+}
+
+.item a p.new-label span{
+    position: relative;
+    content: 'SENHA SALVA'
+}
+.item:hover a p.new-label span{
+    display: none;
+}
+.item:hover a p.new-label:after{
+    content: 'COPIAR SENHA';
+}
+
 .right{
     float : right !important;
 }

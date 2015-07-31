@@ -15,6 +15,13 @@
             </div>
             <form method="POST" action="/auth/login">
                 {!! csrf_field() !!}
+                @if($errors->has())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger">
+                            <strong>Erro!</strong> {{ $error }}
+                        </div>
+                    @endforeach
+                @endif
                 <label>Usuário</label>
                 <input type="text" name="email" value="{{ old('email') }}" />
                 <label>Senha</label>
@@ -25,10 +32,9 @@
                 <div class="submit">
                     <input type="submit"  value="LOGIN" >
                 </div>
-                <div>
-                    <a   href="{{URL::to('auth\register')}}">Cadastrar nova conta</a>
-                    <br/>
-                    {{--<a   href="\auth\register">Esqueci minha senha...</a>--}}
+                <div align="center">
+                    <a   href="{{URL::to('auth\register')}}">Cadastrar nova conta</a> - <a   href="password\reset">Esqueci minha senha</a>
+
                 </div>
 
             </form>

@@ -1,12 +1,12 @@
  <!-- Brand and toggle get grouped for better mobile display -->
 <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only">Menu principal</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="index.html">MyPass - Password Storage</a>
+    <a class="navbar-brand" href="{{URL::to('/auth/register')}}">{{ trans('messages.title') }}</a>
 </div>
 <!-- Top Menu Items -->
 <ul class="nav navbar-right top-nav">
@@ -15,13 +15,10 @@
                     class="caret"></b></a>
         <ul class="dropdown-menu">
             <li>
-                <a href="#"><i class="fa fa-fw fa-user"></i>Perfil</a>
+                <a href="{{URL::to('/profile')}}"><i class="fa fa-fw fa-user"></i>Perfil</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-lock"></i>Passwords</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-fw fa-gear"></i>Configurações</a>
+                <a href="{{URL::to('/home')}}"><i class="fa fa-fw fa-lock"></i>Senhas</a>
             </li>
             <li class="divider"></li>
             <li>

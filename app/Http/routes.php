@@ -16,14 +16,39 @@ Route::get('/', 'Auth\AuthController@getLogin');
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::delete('account/inactive',  array(
+    'uses' => 'Manager\ProfileController@inactive',
+    'as' => 'account.inactive'
+));
 
 // Registration routes...
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
+Route::get('password/reset', array(
+    'uses' => 'Auth\PasswordController@remind',
+    'as' => 'password.remind'
+));
+
+Route::post('password/reset', array(
+    'uses' => 'Auth\PasswordController@request',
+    'as' => 'password.request'
+));
+
+Route::get('password/reset/{token}', array(
+    'uses' => 'Auth\PasswordController@reset',
+    'as' => 'password.reset'
+));
+
+Route::post('password/reset/{token}', array(
+    'uses' => 'Auth\PasswordController@update',
+    'as' => 'password.update'
+));
+
 Route::resource('password', 'Manager\PasswordManagerController');
 Route::resource('dashboard', 'Manager\PasswordManagerController');
 Route::resource('home', 'Manager\PasswordManagerController');
+Route::resource('profile', 'Manager\ProfileController');
 
 
 /*
